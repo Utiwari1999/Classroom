@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>BPlagiarism</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  
+    <!-- <link rel="stylesheet" href="/styles.css"> -->
+<style>
+
+  .custom-file-input{
+      margin-top:90px;
+      margin-left: 200px;
+      cursor:pointer;
+      color:green !important;
+      
+
+
+  }
+
+  .heading{
+      margin-left:800px
+  }
+  .custom-file{
+      cursor: pointer !important;
+
+  }
+  .formclass{
+      margin-top:100px;
+      margin-left:700px;
+      border:1px solid black;
+      border-radius: 20px;
+      width:500px;
+      height:300px;
+
+  }
+
+  .custom-file-input::before {
+      content: 'Select File';
+      display: inline-flex;
+      background: linear-gradient(top, #f9f9f9, #e3e3e3);
+      border: 1px solid #999;
+      border-radius: 3px;
+      padding: 5px 8px;
+      outline: none;
+      -webkit-user-select: none;
+      cursor: pointer;
+      text-shadow: 1px 1px #fff;
+      font-weight: 700;
+      font-size: 10pt;
+      outline: none;
+      margin-right: 0px;
+      height: 30px;
+      
+
+    }
+    
+    .custom-file-input::-webkit-file-upload-button {
+      visibility: hidden;
+      outline: none;
+
+    }
+    .custom-file-input:hover::before {
+      outline: none;
+    }
+    .custom-file-input:active::before {
+      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+    }
+  input[type="file"] {
+      
+    color:blue !important;
+  }
+  .custom-file-upload {
+      border: 1px solid red;
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+  }
+
+  .submit{
+      margin-left:195px;
+      background-color: green;
+      height: 50px;
+      width:100px;
+      color:white;
+      border-radius: 20px;
+      cursor:pointer;
+
+  }
+
+  .custom-file-label{
+      margin-left: 180px;
+      margin-top: 20px;
+      font-weight: 700;
+      font-size: 25px;
+
+  }
+  .out{
+      margin-top: 20px;
+  }
+</style>
+
+  </head>
+  <body>
+    <h1 class="heading">Plagiarism Detector</h1>
+       <form id="file_form" method="POST" action="/" enctype="multipart/form-data" class="formclass" onsubmit="checkFile()">
+       {% csrf_token %}
+        <label class="custom-file-label" for="customFile">Choose file</label>
+
+              <div class="custom-file">
+              <input type="file" class="custom-file-input" name="myfile1" id="customFile" onchange="checkFile()">
+              <br/>
+              <label>Name:- </label><input name="label1">
+              </div>
+        <label class="custom-file-label" for="customFile">Choose file</label>
+
+              <div class="custom-file">
+              <input type="file" class="custom-file-input" name="myfile2" id="customFile" onchange="checkFile()">
+              <br/>
+              <label>Name:- </label><input name="label2">
+              </div>
+        <button class="submit" type="submit">Submit</button>
+      </form>
+
+                <pre class="out" id="output">
+                      {% if uploaded_file_url %}
+                        <a href="{{uploaded_file_url}}">{{uploaded_file_url}}</a>
+                      {% endif %}  
+                </pre>
+      
+
+
+                 <script>
+        function checkFile(){
+            
+            var reader = new FileReader();
+            var fileToRead = document.querySelector('.custom-file-input').files[0];
+
+            // attach event, that will be fired, when read is end
+            reader.addEventListener("loadend", function() {
+            // reader.result contains the contents of blob as a typed array
+            // we insert content of file in DOM here
+            document.getElementById('output').innerText = reader.result;
+            });
+
+// start reading a loaded file
+            reader.readAsText(fileToRead);
+                    }
+
+                </script>
+
+
+                <script>
+        // Add the following code if you want the name of the file appear on select
+                $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+        </script>
+
+    </body>
+</html>

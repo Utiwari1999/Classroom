@@ -1,0 +1,12 @@
+URL Count	 URL 								 Match Percentage
+7		https://en.wikipedia.org/wiki/Gareth_Bale 59.17992791011753
+2		https://sco.wikipedia.org/wiki/Gareth_Bale 40.60260759281103
+2		https://www.imdb.com/name/nm5347007/bio 69.20116779732723
+2		https://venngage.net/p/229548/yeah 70.72026644507241
+2		https://www.facebook.com/pages/Fans-of-Gareth-Bale/202104353296264 62.505723064737715
+2		http://www.eplmatches.com/news/gareth-bale-joins-real-madrid/7658/ 70.72026644507241
+2		https://www.sjebrush.org/page/show/5761943-southampton-wing-backs 70.1560760020114
+2		https://www.awakenthegreatnesswithin.com/35-inspirational-gareth-bale-quotes-on-success/ 63.05455753111586
+2		https://www.rpgwatch.com/games/k.html 70.33918921964656
+2		https://www.ribbonfarm.com/2011/10/19/the-quest-for-immortality/ 20.09850254054048
+
