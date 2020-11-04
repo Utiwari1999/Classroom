@@ -4,120 +4,210 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
     <title>BPlagiarism</title>
 
     <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-  
-    <!-- <link rel="stylesheet" href="/styles.css"> -->
-<style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-  .custom-file-input{
-      margin-top:90px;
-      margin-left: 200px;
-      cursor:pointer;
-      color:green !important;
-  }
+    <style>
 
-  .heading{
-      margin-left:800px
-  }
-  .custom-file{
-      cursor: pointer !important;
-
-  }
-  .formclass{
-      margin-top:100px;
-      margin-left:700px;
-      border:1px solid black;
-      border-radius: 20px;
-      width:500px;
-      height:300px;
-
-  }
-
-  .custom-file-input::before {
-      content: 'Select File';
-      display: inline-flex;
-      background: linear-gradient(top, #f9f9f9, #e3e3e3);
-      border: 1px solid #999;
-      border-radius: 3px;
-      padding: 5px 8px;
-      outline: none;
-      -webkit-user-select: none;
-      cursor: pointer;
-      text-shadow: 1px 1px #fff;
-      font-weight: 700;
-      font-size: 10pt;
-      outline: none;
-      margin-right: 0px;
-      height: 30px;
-      
-
-    }
-    
-    .custom-file-input::-webkit-file-upload-button {
-      visibility: hidden;
-      outline: none;
-
-    }
-    .custom-file-input:hover::before {
-      outline: none;
-    }
-    .custom-file-input:active::before {
-      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-    }
-  input[type="file"] {
-      
-    color:blue !important;
-  }
-  .custom-file-upload {
-      border: 1px solid red;
-      display: inline-block;
-      padding: 6px 12px;
-      cursor: pointer;
-  }
-
-  .submit{
-      margin-left:195px;
-      background-color: green;
-      height: 50px;
-      width:100px;
-      color:white;
-      border-radius: 20px;
-      cursor:pointer;
-
-  }
-
-  .custom-file-label{
-      margin-left: 180px;
-      margin-top: 20px;
-      font-weight: 700;
-      font-size: 25px;
-
-  }
-  .out{
-      margin-top: 20px;
-  }
-</style>
+        .custom-file-input{
+            margin-top:90px;
+            margin-left: 200px;
+            cursor:pointer;
+            color:green !important;
+        
+        }
+        
+        .heading{
+            margin-left:600px
+        }
+        .custom-file{
+            cursor: pointer !important;
+        
+        }
+        .formclass{
+            margin-top:100px;
+            margin-left:500px;
+            border:1px solid black;
+            border-radius: 20px;
+            width:500px;
+            height:330px;
+        
+        }
+        
+        .custom-file-input::before {
+            content: 'Select File';
+            display: inline-flex;
+            background: linear-gradient(top, #f9f9f9, #e3e3e3);
+            border: 1px solid #999;
+            border-radius: 3px;
+            padding: 5px 8px;
+            outline: none;
+            -webkit-user-select: none;
+            cursor: pointer;
+            text-shadow: 1px 1px #fff;
+            font-weight: 700;
+            font-size: 10pt;
+            outline: none;
+            margin-right: 0px;
+            height: 30px;
+            
+        
+          }
+          
+          .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+            outline: none;
+        
+          }
+          .custom-file-input:hover::before {
+            outline: none;
+          }
+          .custom-file-input:active::before {
+            background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+          }
+        input[type="file"] {
+            
+           color:blue !important;
+        }
+        .custom-file-upload {
+            border: 1px solid red;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        
+        .submit{
+            margin-left:195px;
+            background-color: green;
+            height: 50px;
+            width:100px;
+            color:white;
+            border-radius: 20px;
+            cursor:pointer;
+        
+        }
+        
+        .custom-file-label{
+            margin-left: 180px;
+            margin-top: 20px;
+            font-weight: 700;
+            font-size: 25px;
+        
+        }
+        .out{
+            margin-top: 20px;
+        }
+        
+        #spinner{
+          display: none;
+        }
+        
+        .disp{
+          display: block;
+        }
+        
+        .spinstyle{
+        
+          position:absolute;
+          top:350px;
+          left:620px;
+          color:#4285F4;
+          size: 400px;
+          
+        
+        }
+        
+        .fa-spinner{
+          z-index: 100;
+          font-size: 200px !important;
+        
+        }
+        
+        .lab{
+          margin-left: 120px;
+          margin-bottom: 20px;
+        }
+        
+        
+        /**/
+        
+        #monitor{
+        
+        top:150px;
+        left:540px;
+        position:relative;
+        width:350px;
+        height:450px;
+        border:1px solid rgba(0,0,0,.1);  
+        
+        
+        }
+        #monitor .screen
+        {
+        margin:auto;
+        left:40px !important;
+        margin-top:10px;
+        width:350px;
+        height:450px;
+        background: transparent url('http://www.terminally-incoherent.com/blog/wp-content/uploads/2010/02/maketitle.jpg');
+        background-size:cover;
+        background-color: rgba(0,0,0,.2);
+        }
+        
+        #monitor .scan
+        {
+        width:100%;
+        height:10px;
+        background-color:red;
+        position:absolute;
+        z-index:4;
+         -moz-animation: scan 5s infinite;
+        -webkit-animation: scan 5s infinite;
+        animation: scan 5s infinite;
+         -webkit-animation-direction: alternate-reverse;
+        box-shadow:0px 0px 30px rgba(255,204,102,.5);
+        
+        
+        }
+        
+        @-webkit-keyframes scan {
+        0%, 100% {
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+        }
+        100% {
+          -webkit-transform: translateY(445px);
+          transform: translateY(445px);
+        }
+        }
+             </style>
 
   </head>
   <body>
+      <div id="disp">
     <h1 class="heading">Plagiarism Detector</h1>
-       <form id="file_form" method="POST" action="/" enctype="multipart/form-data" class="formclass" onsubmit="checkFile()">
+       <form id="file_form"  class="formclass" method="POST" action="/" enctype="multipart/form-data" onsubmit="checkFile()">
        {% csrf_token %}
         <label class="custom-file-label" for="customFile">Choose file</label>
 
+            
               <div class="custom-file">
-              <input type="file" class="custom-file-input" name="myfile" id="customFile" onchange="checkFile()">
-              <br/>
-              <label>Name:- </label><input name="name">
-              </div>
+                        
+
+                <input type="file" class="custom-file-input" name="myfile" id="customFile" onchange="checkFileonchange()">
+                    <br/>
+                </div>
+                <label class="lab">Name:- </label><input name="name">
           <button class="submit" type="submit">Submit</button>
       </form>
 
@@ -126,11 +216,26 @@
                         <a href="{{uploaded_file_url}}">{{uploaded_file_url}}</a>
                       {% endif %}  
                 </pre>
-      
+            </div>
+
+
+                <div id="spinner">
+                    <div id="monitor">
+            
+                      <div class="scan"></div>
+                      <div class="screen"></div>
+                      
+                    </div>
+                    
+                    <i class="fa fa-spinner fa-spin fa-10x spinstyle" style="font-size:24px"></i>
+                  
+                  </div>
+
+
 
 
                  <script>
-        function checkFile(){
+        function checkFileonchange(){
             
             var reader = new FileReader();
             var fileToRead = document.querySelector('.custom-file-input').files[0];
@@ -146,7 +251,24 @@
             reader.readAsText(fileToRead);
                     }
 
+                    
+
                 </script>
+
+            <script>
+
+function checkFile(){
+
+    d1=  document.getElementById('disp');
+    d1.style.display="none";
+    d2= document.getElementById('spinner');
+    d2.style.display="block";
+
+
+
+           }
+
+       </script>
 
 
                 <script>
