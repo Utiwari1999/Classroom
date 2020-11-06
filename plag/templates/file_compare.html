@@ -173,7 +173,7 @@
   </head>
   <body>
     <h1 class="heading">Plagiarism Detector</h1>
-       <form id="file_form" method="POST" action="/" enctype="multipart/form-data" class="formclass" onsubmit="checkFile()">
+       <form id="file_form" method="POST" action="/compare/" enctype="multipart/form-data" class="formclass" onsubmit="checkFile()">
        {% csrf_token %}
        <div >
         <label class="custom-file-label" for="customFile" >Choose files <i class="fa fa-files-o"></i></label>

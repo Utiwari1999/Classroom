@@ -1,0 +1,17 @@
+asgiref==3.2.10
+certifi==2020.6.20
+chardet==3.0.4
+click==7.1.2
+Django==3.1.2
+idna==2.10
+joblib==0.17.0
+lxml==4.6.1
+nltk==3.5
+python-docx==0.8.10
+pytz==2020.1
+regex==2020.10.28
+requests==2.24.0
+simplejson==3.17.2
+sqlparse==0.4.1
+tqdm==4.51.0
+urllib3==1.25.11
