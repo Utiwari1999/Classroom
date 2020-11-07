@@ -42,21 +42,50 @@ def compare_files(request):
         fs = FileSystemStorage()
         if myfile1.name.endswith('.txt'):
             label1 = label1 + '.txt'
+        elif myfile1.name.endswith('.pdf'):
+            label1 = label1 + '.pdf'
         else:
             label1 = label1 + '.docx'
+
         filename1 = fs.save(label1, myfile1)
         
         fs = FileSystemStorage()
         if myfile2.name.endswith('.txt'):
             label2 = label2 + '.txt'
+        elif myfile2.name.endswith('.pdf'):
+            label2 = label2 + '.pdf'
         else:
             label2 = label2 + '.docx'
         filename2 = fs.save(label2, myfile2)
+        # compare_two(myfile1,myfile2)
+        line1,line2,pos1,pos2,dataA,dataB = compare_two(myfile1,myfile2)
+        print(pos1)
+        print(pos2)
+        liA = []
+        prev_pos = 0
+        pos1.sort()
+        for i,j in pos1:
+            # i,j = int(i),int(j)
 
-        output = compare_two(myfile1,myfile2)
+            liA.append([dataA[prev_pos:i],0]) 
+            liA.append([dataA[i:j],1])
+            prev_pos = j
+        liA.append([dataA[prev_pos:],0])
         
-        # return render(request, 'success.html', {
-        #     'render_obj': render_obj,
-        #     'filename' : name,
-        # })
-    return render(request, 'file_compare.html',{'message':"Hello World"})
+        pos2.sort()
+        liB = []
+        prev_pos = 0
+        for i,j in pos2:
+            # i,j = int(i),int(j)
+            liB.append([dataB[prev_pos:i],0]) 
+            liB.append([dataB[i:j],1])
+            prev_pos = j
+        liB.append([dataB[prev_pos:],0])
+
+        return render(request, 'success.html', {
+            'data1': liA,
+            'data2': liB,
+            'filename1' : label1,
+            'filename2' : label2,
+        })
+    return render(request, 'file_compare.html')

@@ -7,27 +7,57 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        mark {
+          background-color: #FDD99B !important;
+          color: black;
+        }
+        #hl {
+          text-allign : justify
+        }
+
+        mark:active {
+          background-color: yellow !important; 
+        }
+
+        mark:focus {
+          background-color: skyblue !important;
+        }
+
+    </style>
 
     <title>Result</title>
   </head>
   <body>
-    <h1>Plagarised Result of {{filename}}</h1>
+    <h1>Plagarised Result of {{filename1}}  {{filename2}}</h1>
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5" id="hl">
+    {% for text,flag  in data1 %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col md-3">URL Count</div>
-            <div class="col md-6">URL</div>
-            <div class="col md-3">Match Percentage</div>
-        </div>
-        {% for url_count,url,match_per in render_obj %}
-            <div class="row">
-                <div class="col md-3">{{url_count}}</div>
-                <div class="col md-6"><a href="{{url}}">{{url}}</a></div>
-                <div class="col md-3">{{match_per}}</div>
-            </div>
-        {% endfor %}
+      {% if flag %}
+      <mark class="d{{id}}">{{text}}</mark>
+      {% else %}
+      <span>{{text}}</span>
+      {% endif %}    
+    
+    {% endfor %}
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-5" id="hl">
+
+    {% for text,flag  in data2 %}
+
+      {% if flag %}
+      <mark class="d{{id}}">{{text}}</mark>
+      
+      {% else %}
+      <span>{{text}}</span>
+      {% endif %}    
+    
+    {% endfor %}
     </div>
-
+  </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -35,3 +65,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+<script>
+
+</script>

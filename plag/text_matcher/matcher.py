@@ -113,9 +113,9 @@ class Matcher():
         self.locationsB = []
 
         self.initial_matches = self.get_initial_matches()
-        print(self.initial_matches)
+        # print(self.initial_matches)
         self.healed_matches = self.heal_neighboring_matches()
-        print(self.healed_matches)
+        # print(self.healed_matches)
 
         
         self.extended_matches = self.extend_matches()
@@ -137,7 +137,7 @@ class Matcher():
         sequence = SequenceMatcher(None,self.textAgrams,self.textBgrams)
         matchingBlocks = sequence.get_matching_blocks()
 
-        print(matchingBlocks)
+        # print(matchingBlocks)
         # Only return the matching sequences that are higher than the threshold given by the user.
         highMatchingBlocks = [match for match in matchingBlocks if match.size > self.threshold]
         numBlocks = len(highMatchingBlocks)
@@ -180,7 +180,7 @@ class Matcher():
                 return None
         return locations
 
-    def getMatch(self, match, context=5):
+    def getMatch(self, match, line1,line2,pos1,pos2,context=5):
         textA, textB = self.textA, self.textB
         lengthA = match.sizeA + self.ngramSize -1 # offset according to nGram size
         lengthB = match.sizeB + self.ngramSize -1 # offset according to nGram size
@@ -191,11 +191,11 @@ class Matcher():
         if spansA is not None and spansB is not None:
             self.locationsA.append(spansA)
             self.locationsB.append(spansB)
-            line1 = ('%s: %s %s' % (textA.label, spansA, wordsA) )
-            line2 = ('%s: %s %s' % (textB.label, spansB, wordsB) )
-            out = line1 + '\n' + line2
-            return out
-
+            line1.append(wordsA)
+            line2.append(wordsB)
+            pos1.append(spansA)
+            pos2.append(spansB)
+            
     def heal_neighboring_matches(self, minDistance=8):
         healedMatches = []
         ignoreNext = False
@@ -292,14 +292,18 @@ class Matcher():
 
     def match(self):
         """ Gets and prints all matches. """
+        line1 = []
+        line2 = []
+        pos1 = []
+        pos2 = []
         li = []
         for num, match in enumerate(self.extended_matches):
             # print('match: ', match)
-            out = self.getMatch(match)
-            li.append(out)
-            print('match %s:' % (num+1))
-            print(out)
+            self.getMatch(match,line1,line2,pos1,pos2)
+            
+            # print('match %s:' % (num+1))
+            # print(out)
         
         # return self.numMatches, self.locationsA, self.locationsB
 
-        return li
+        return line1,line2,pos1,pos2
