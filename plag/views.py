@@ -7,18 +7,21 @@ import operator
 # Imaginary function to handle an uploaded file.
 
 
+def home(request):
+    return render(request,'Frontpage.html')
 
 def upload_file(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
-        name = request.POST.get('name')
+        tag = request.POST.get('name')
         fs = FileSystemStorage()
-        if myfile.name.endswith('.txt'):
-            name = name + '.txt'
-        else:
-            name = name + '.docx'
-        filename = fs.save(name, myfile)
-        c,output = process_file(myfile)
+        # if myfile.name.endswith('.txt'):
+        #     name = name + '.txt'
+        # else:
+        #     name = name + '.docx'
+        name = ''
+        filename = fs.save(myfile.name,myfile)
+        c,output = process_file(myfile,tag)
         render_obj = []
         for ele in sorted(output.items(),key=operator.itemgetter(1),reverse=True):
             if c[ele[0]]*100 > 20 and ele[1]>1:
@@ -28,7 +31,7 @@ def upload_file(request):
             'render_obj': render_obj,
             'filename' : name,
         })
-    return render(request, 'index.html',{'message':"Hello World"})
+    return render(request, 'index.html')
 
 
 def compare_files(request):
@@ -63,24 +66,33 @@ def compare_files(request):
         print(pos2)
         liA = []
         prev_pos = 0
-        pos1.sort()
-        for i,j in pos1:
+
+        pos11 = []
+        pos21 = []
+        for i in range(len(pos1)):
+            pos11.append(list(pos1[i])+[i])
+            pos21.append(list(pos2[i])+[i])
+        print(pos11)
+        print(pos21)
+        for i,j,k in pos11:
             # i,j = int(i),int(j)
 
-            liA.append([dataA[prev_pos:i],0]) 
-            liA.append([dataA[i:j],1])
+            liA.append([dataA[prev_pos:i],-1,0]) 
+            liA.append([dataA[i:j],k,1])
             prev_pos = j
-        liA.append([dataA[prev_pos:],0])
+        liA.append([dataA[prev_pos:],-1,0])
         
-        pos2.sort()
+        pos21.sort()
         liB = []
         prev_pos = 0
-        for i,j in pos2:
+        for i,j,k in pos21:
             # i,j = int(i),int(j)
-            liB.append([dataB[prev_pos:i],0]) 
-            liB.append([dataB[i:j],1])
+            liB.append([dataB[prev_pos:i],-1,0]) 
+            liB.append([dataB[i:j],k,1])
             prev_pos = j
-        liB.append([dataB[prev_pos:],0])
+        liB.append([dataB[prev_pos:],-1,0])
+
+        
 
         return render(request, 'success.html', {
             'data1': liA,

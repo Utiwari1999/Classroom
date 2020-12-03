@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-# Master script for the plagiarism-checker
-# Coded by: Shashank S Rao
 
-#import other modules
 from .cosineSim import *
 from .htmlstrip import *
-from .extractdocx import *
 
 #import required modules
 import codecs
@@ -21,6 +16,8 @@ import requests
 
 # Given a text string, remove all non-alphanumeric
 # characters (using Unicode definition of alphanumeric).
+tags = ''
+
 def getQueries(text,n):
     import re
     sentenceEnders = re.compile('[.!?]')
@@ -48,17 +45,18 @@ def getQueries(text,n):
 
 def searchWeb(text,output,c):
     headers = {
-        "x-rapidapi-key": "c36e8235f4mshc289126c89bf6d2p147104jsn5a9342b9f444",
+        "x-rapidapi-key": "a11b2cd662mshab360b5a103343cp1269d6jsnf45d439ef002",
         "x-rapidapi-host" :"google-search3.p.rapidapi.com"
     }
     query = {
-        "q": text,
+        "q": text+' '+tags,
         "num": 5,
         "lr":"lang_en"
     }
     base_url = f'https://rapidapi.p.rapidapi.com/api/v1/search/'
     url = base_url 
     resp = requests.get("https://rapidapi.p.rapidapi.com/api/v1/search/" + urllib.parse.urlencode(query), headers=headers)
+
 
     results = resp.json()
     from collections import defaultdict
@@ -79,14 +77,68 @@ def searchWeb(text,output,c):
     except:
         return
     return 
-    
+
+
+import threading
+def task(count,q,output,c):
+    i = 0
+    for s in q[:count]:
+        searchWeb(s,output,c)
+        msg = "\r"+str(i)+"/"+str(count)+"completed..."
+        sys.stdout.write(msg)
+        sys.stdout.flush()
+        i=i+1
+
+def task2(count,q,output,c):
+    i = 0
+    for s in q[count:2*count]:
+        searchWeb(s,output,c)
+        msg = "\r"+str(i)+"/"+str(count)+"completed..."
+        sys.stdout.write(msg)
+        sys.stdout.flush()
+        i=i+1
+
+def task3(count,q,output,c):
+    i = 0
+    for s in q[2*count:3*count]:
+        searchWeb(s,output,c)
+        msg = "\r"+str(i)+"/"+str(count)+"completed..."
+        sys.stdout.write(msg)
+        sys.stdout.flush()
+        i=i+1
+def task4(count,q,output,c):
+    i = 0
+    for s in q[3*count:4*count]:
+        searchWeb(s,output,c)
+        msg = "\r"+str(i)+"/"+str(count)+"completed..."
+        sys.stdout.write(msg)
+        sys.stdout.flush()
+        i=i+1
+def task5(count,q,output,c):
+    i = 0
+    for s in q[4*count:5*count]:
+        searchWeb(s,output,c)
+        msg = "\r"+str(i)+"/"+str(count)+"completed..."
+        sys.stdout.write(msg)
+        sys.stdout.flush()
+        i=i+1
+def task6(count,q,output,c):
+    i = 0
+    for s in q[5*count:6*count]:
+        searchWeb(s,output,c)
+        msg = "\r"+str(i)+"/"+str(count)+"completed..."
+        sys.stdout.write(msg)
+        sys.stdout.flush()
+        i=i+1
 
 # Use the main function to scrutinize a file for
 # plagiarism
-def process(data):
+def process(data,tag):
     # n-grams N VALUE SET HERE
-    n=9
-    print(data)
+    global tags 
+    tags = tag 
+    n=7
+
     queries = getQueries(data,n)
     q = [' '.join(d) for d in queries]
     #using 2 dictionaries: c and output
@@ -98,15 +150,30 @@ def process(data):
     count = len(q)
     if count>5:
         count=5
-    # f = open("sampleOut.txt","w")
+    import time 
+    start = time.time()
+    t1 = threading.Thread(target=task, args=(count,q,output,c)) 
+    t2 = threading.Thread(target=task2, args=(count,q,output,c)) 
+    t3 = threading.Thread(target=task3, args=(count,q,output,c)) 
+    t4 = threading.Thread(target=task4, args=(count,q,output,c)) 
+    t5 = threading.Thread(target=task5, args=(count,q,output,c))
+    t6 = threading.Thread(target=task6, args=(count,q,output,c))    
+    t1.start()
+    t2.start()
+    t3.start()
+    t4.start()
+    t5.start()
+    t6.start()
+    t1.join()
+    t2.join()
+    t3.join()
+    t4.join()
+    t5.join()
+    t6.join()
+    end = time.time()
+    print(end-start)
 
-    for s in q[:count]:
-        searchWeb(s,output,c)
-        print(output,c)
-        msg = "\r"+str(i)+"/"+str(count)+"completed..."
-        sys.stdout.write(msg)
-        sys.stdout.flush()
-        i=i+1
+
     
 
     # Line --> Search --> Most Related (cosine 60-70%+)-- Highlight <url> 

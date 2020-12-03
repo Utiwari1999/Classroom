@@ -8,20 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-        mark {
-          background-color: #FDD99B !important;
-          color: black;
-        }
         #hl {
-          text-allign : justify
+          text-allign : justify !important;
         }
 
-        mark:active {
-          background-color: yellow !important; 
+        .mark1 {
+          background-color: #FAC235;
         }
 
-        mark:focus {
-          background-color: skyblue !important;
+        .mark2 {
+          background-color: yellow;
         }
 
     </style>
@@ -29,27 +25,25 @@
     <title>Result</title>
   </head>
   <body>
-    <h1>Plagarised Result of {{filename1}}  {{filename2}}</h1>
+    <center><h1>Plagiarised Result of {{filename1}}  {{filename2}}</h1></center>
     <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-5" id="hl">
-    {% for text,flag  in data1 %}
+    <div class="col-md-5" id="hl" style="text-align : justify; margin-left: 30px; height:600px; overflow-y:scroll;">
+    {% for text,k,flag  in data1 %}
 
       {% if flag %}
-      <mark class="d{{id}}">{{text}}</mark>
+      <span class="d{{k}} mark1" id="hm">{{text}}</span>
       {% else %}
       <span>{{text}}</span>
       {% endif %}    
     
     {% endfor %}
   </div>
-  <div class="col-md-1"></div>
-  <div class="col-md-5" id="hl">
+  <div class="col-md-5" id="hl" style="text-align : justify; margin-left:45px; height:600px; overflow-y:scroll;">
 
-    {% for text,flag  in data2 %}
+    {% for text,k,flag  in data2 %}
 
       {% if flag %}
-      <mark class="d{{id}}">{{text}}</mark>
+      <span class="d{{k}} mark1" id="hm">{{text}}</span>
       
       {% else %}
       <span>{{text}}</span>
@@ -66,7 +60,20 @@
   </body>
 </html>
 
-
 <script>
+$(document).ready(function(){
+	$(document).on("click", function(event){
+		var name=event.target.className;
+		var array=name.split(" ");
+		if(array[0][0] == 'd'){
+			$('.mark1').removeClass("mark2");
+			if(array.length==2 && array[0][0]=='d' && array[1]=="mark1")
+				$('.'+array[0]).addClass("mark2");
+			else
+			$('.'+array[0]).removeClass("mark2");
+	}
 
+})});
 </script>
+
+

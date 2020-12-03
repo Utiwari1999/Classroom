@@ -1,4 +1,4 @@
-#module to check cosine similarity of two strings
+# module to check cosine similarity of two strings
 
 import re, math
 from collections import Counter
@@ -35,15 +35,9 @@ def text_to_vector(text):
 #returns cosine similarity of two words
 #uses: text_to_vector(text) and get_cosine(v1,v2)
 def cosineSim(text1,text2):
-     # print(text1)
-     # text1 = text1.decode('utf-8')
-     # print("bkjsbjsbsjbvksjb")
-     # print(text2)
      vector1 = text_to_vector(text1)
-     vector2 = text_to_vector(text2)
-     #print vector1,vector2	
+     vector2 = text_to_vector(text2)	
      cosine = get_cosine(vector1, vector2)
-     # print(cosine)
      return cosine
 
 

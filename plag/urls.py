@@ -18,6 +18,7 @@ from django.urls import path,include
 from . import views
 
 urlpatterns = [
-    path('',views.upload_file),
+    path('',views.home),
+    path('web/',views.upload_file),
     path('compare/',views.compare_files),
 ]

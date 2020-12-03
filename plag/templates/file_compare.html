@@ -24,7 +24,12 @@
       color:green !important;
   }
 
+  body{
+  background-image: url('https://st.depositphotos.com/1526816/1891/v/600/depositphotos_18916471-stock-illustration-a-classroom.jpg');
 
+  background-repeat: no-repeat;
+  background-size: cover;
+}
   .custom-file-input2{
       margin-top:90px;
       margin-left: 200px;
@@ -45,8 +50,9 @@
   .formclass{
       margin-top:100px;
       margin-left:250px;
-      border:1px solid black;
+      border:1px solid white;
       border-radius: 20px;
+      box-shadow:  3px 3px 5px 6px #ccc;
       width:1000px;
       height:350px;
 
@@ -120,7 +126,7 @@
 
   input[type="file"] {
       
-    color:blue !important;
+    color:white !important;
   }
   .custom-file-upload {
       border: 1px solid red;
@@ -142,10 +148,11 @@
   }
 
   .custom-file-label{
-      margin-left: 450px;
+      margin-left: 400px;
       margin-top: 20px;
       font-weight: 700;
       font-size: 25px;
+      color:white;
 
   }
   .out1{
@@ -162,6 +169,7 @@
       display: inline-flex;
   }
   .lab{
+      color: white;
       margin-left: 110px;
   }
   .abc{
@@ -172,11 +180,10 @@
 
   </head>
   <body>
-    <h1 class="heading">Plagiarism Detector</h1>
        <form id="file_form" method="POST" action="/compare/" enctype="multipart/form-data" class="formclass" onsubmit="checkFile()">
        {% csrf_token %}
        <div >
-        <label class="custom-file-label" for="customFile" >Choose files <i class="fa fa-files-o"></i></label>
+        <label class="custom-file-label" for="customFile" >Document Checker <i class="fa fa-files-o"></i></label>
 
         <div class="gfj">
               <div class="custom-file" >

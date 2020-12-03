@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>BPlagiarism</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="/styles.css"> -->
+     <style>
+
+.custom-file-input{
+    margin-top:90px;
+    margin-left: 200px;
+    cursor:pointer;
+    color:green !important;
+
+}
+
+.heading{
+    margin-left:55px;
+    margin-top: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+}
+.custom-file{
+    cursor: pointer !important;
+
+}
+.formclass{
+    margin-top:100px;
+    margin-left:500px;
+    border-radius: 20px;
+    box-shadow:  3px 3px 5px 6px #ccc;
+    width:500px;
+    height:330px;
+
+}
+
+.custom-file-input::before {
+    content: 'Select File';
+    display: inline-flex;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 8px 8px;
+    outline: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 14pt;
+    letter-spacing: 1;
+    outline: none;
+    margin-right: 0px;
+    height: 40px;
+    
+
+  }
+  
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+    outline: none;
+
+  }
+  .custom-file-input:hover::before {
+    outline: none;
+  }
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
+input[type="file"] {
+    
+   color:white !important;
+}
+.custom-file-upload {
+    border: 1px solid red;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.submit{
+    margin-left:195px;
+    background-color: green;
+    height: 50px;
+    width:100px;
+    color:white;
+    border-radius: 20px;
+    cursor:pointer;
+
+}
+
+.custom-file-label{
+    margin-left: 180px;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 25px;
+    color:white;
+
+
+}
+.out{
+    margin-top: 20px;
+}
+
+#spinner{
+  display: none;
+}
+
+.disp{
+  margin:auto ;
+  margin-top: 100px;
+  display: block;
+  width:700px;
+  height:400px;
+  background-color: rgba(252, 248, 248, 0.6);
+}
+
+.spinstyle{
+
+  position:absolute;
+  top:350px;
+  left:620px;
+  color:white;
+  size: 400px;
+  
+
+}
+
+.fa-spinner{
+  z-index: 100;
+  font-size: 200px !important;
+
+}
+
+.lab{
+  margin-left: 100px;
+  margin-bottom: 20px;
+  color:white;
+}
+
+
+/**/
+
+body{
+  background-image: url('https://i.pinimg.com/originals/ea/e3/65/eae36546fefbd433dbf7bec048e7d48b.png');
+
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#monitor{
+
+top:150px;
+left:540px;
+position:relative;
+width:350px;
+height:450px;
+border:1px solid rgba(0,0,0,.1);  
+
+
+}
+
+.but{
+
+    height: 50px;
+    width:500px;
+    padding: 5px;
+    margin-bottom: 30px;
+    margin-left: 100px;
+    margin-top: 50px;
+    background-color:rgba(43, 31, 214, 0.9);
+    color:white;
+    font-size: medium;
+    font-weight: 500;
+    border:transparent;
+    border-radius: 10px;
+
+}
+#monitor .screen
+{
+margin:auto;
+left:40px !important;
+margin-top:10px;
+width:350px;
+height:450px;
+background: transparent url('http://www.terminally-incoherent.com/blog/wp-content/uploads/2010/02/maketitle.jpg');
+background-size:cover;
+background-color: rgba(0,0,0,.2);
+}
+
+#monitor .scan
+{
+width:100%;
+height:10px;
+background-color:red;
+position:absolute;
+z-index:4;
+ -moz-animation: scan 5s infinite;
+-webkit-animation: scan 5s infinite;
+animation: scan 5s infinite;
+ -webkit-animation-direction: alternate-reverse;
+box-shadow:0px 0px 30px rgba(255,204,102,.5);
+
+
+}
+
+@-webkit-keyframes scan {
+0%, 100% {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+100% {
+  -webkit-transform: translateY(445px);
+  transform: translateY(445px);
+}
+}
+     </style>
+
+
+  </head>
+  <body>
+       <div class="disp">
+               <h1 class="heading">Welcome to the Plagiarism Detector</h1>
+
+               <div class="mid">
+                   <a href="/web"><button class="but"><i class="fa fa-search"></i> &nbsp; Web Based Checking</button></a>
+                   <br>
+                   <a href="/compare"><button class="but"><i class="fa fa-file-code-o"></i>&nbsp; Document Matcher</button></a>
+
+               </div>
+             
+
+      
+      </div>
+
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+              
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>

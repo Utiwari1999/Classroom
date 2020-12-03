@@ -23,9 +23,8 @@ class Text:
         self.label = label
         self.preprocess(self.text)
         self.tokens = self.getTokens(removeStopwords)
-        # print(self.tokens)
         self.trigrams = self.ngrams(3)
-        # print(self.trigrams)
+
 
     def preprocess(self, text):
         """ Heals hyphenated words, and maybe other things. """
@@ -35,7 +34,6 @@ class Text:
         """ Tokenizes the text, breaking it up into words, removing punctuation. """
         tokenizer = nltk.RegexpTokenizer('[a-zA-Z]\w+\'?\w*') # A custom regex tokenizer.
         spans = list(tokenizer.span_tokenize(self.text))
-        # print(spans)
         # Take note of how many spans there are in the text
         self.length = spans[-1][-1] # last useful character
         tokens = tokenizer.tokenize(self.text)
@@ -45,7 +43,6 @@ class Text:
         if not removeStopwords:
             self.spans = spans
             return tokens
-        # print(tokens)
         tokenSpans = list(zip(tokens, spans)) # zip it up
         stopwords = nltk.corpus.stopwords.words('english') # get stopwords
         tokenSpans = [ token for token in tokenSpans if token[0] not in stopwords ] # remove stopwords from zip
@@ -105,18 +102,13 @@ class Matcher():
 
         self.textAgrams = self.textA.ngrams(ngramSize)
         self.textBgrams = self.textB.ngrams(ngramSize)
-        
-        # print(self.textAgrams)
-        # print(self.textBgrams)
 
         self.locationsA = []
         self.locationsB = []
 
         self.initial_matches = self.get_initial_matches()
-        # print(self.initial_matches)
+        
         self.healed_matches = self.heal_neighboring_matches()
-        # print(self.healed_matches)
-
         
         self.extended_matches = self.extend_matches()
 
@@ -137,7 +129,6 @@ class Matcher():
         sequence = SequenceMatcher(None,self.textAgrams,self.textBgrams)
         matchingBlocks = sequence.get_matching_blocks()
 
-        # print(matchingBlocks)
         # Only return the matching sequences that are higher than the threshold given by the user.
         highMatchingBlocks = [match for match in matchingBlocks if match.size > self.threshold]
         numBlocks = len(highMatchingBlocks)
@@ -149,8 +140,6 @@ class Matcher():
 
     def getContext(self, text, start, length, context):
         match = self.getTokensText(text, start, length)
-        # before = self.getTokensText(text, start-context, context)
-        # print(before)
         after = self.getTokensText(text, start+length, context)
         out = " ".join([match, after])
         out = out.replace('\n', ' ') # Replace newlines with spaces.
@@ -215,9 +204,8 @@ class Matcher():
                 ignoreNext = False
                 continue
             else:
-                # Overlappting Matches --> Merging into a single paragraph 
-                if ( nextMatch.a - (match.a + match.size) ) < minDistance:
-                    # logging.debug('Potential healing candidate found: ' % (match, nextMatch))
+                # Merging into a single match 
+                if ( nextMatch.a - (match.a + match.size) ) < minDistance and ( nextMatch.b - (match.b + match.size) ) < minDistance:
                     sizeA = (nextMatch.a + nextMatch.size) - match.a
                     sizeB = (nextMatch.b + nextMatch.size) - match.b
                     healed = ExtendedMatch(match.a, match.b, sizeA, sizeB)
@@ -243,7 +231,7 @@ class Matcher():
         Examples:
         color, colour: 0.1818181818
         theater, theatre: 0.2857
-        day, today: 0.5  distance = 2 av = (3+5)/2 = 4
+        day, today: 0.5  distance = 2 average = (3+5)/2 = 4
         foobar, foo56bar: 0.2857
         """
         distance = editDistance(wordA, wordB)
@@ -286,7 +274,6 @@ class Matcher():
             # If we've gone through the whole list and there's nothing
             # left to extend, then stop. Otherwise do this again.
             self.extend_matches()
-        print(self.healed_matches)
 
         return self.healed_matches
 
@@ -298,12 +285,8 @@ class Matcher():
         pos2 = []
         li = []
         for num, match in enumerate(self.extended_matches):
-            # print('match: ', match)
             self.getMatch(match,line1,line2,pos1,pos2)
-            
-            # print('match %s:' % (num+1))
-            # print(out)
-        
-        # return self.numMatches, self.locationsA, self.locationsB
 
         return line1,line2,pos1,pos2
+
+

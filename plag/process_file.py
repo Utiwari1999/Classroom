@@ -3,7 +3,7 @@ from .code.main import process
 from .text_matcher.matcher import Matcher,Text
 import pdfplumber
 
-def process_file(filename):
+def process_file(filename,tag):
     if filename.name.endswith('.docx'):
         document = Document(filename)
         fullText = []
@@ -15,7 +15,7 @@ def process_file(filename):
         data = ''
         for chunk in filename.chunks():
             data += chunk.decode('utf')
-    return process(data)
+    return process(data,tag)
     
      
 def compare_two(filename1,filename2):

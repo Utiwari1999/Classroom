@@ -4,19 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>BPlagiarism</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="/styles.css"> -->
+     <style>
 
 .custom-file-input{
     margin-top:90px;
@@ -146,7 +141,6 @@ input[type="file"] {
 
 body{
   background-image: url('https://st.depositphotos.com/1526816/1891/v/600/depositphotos_18916471-stock-illustration-a-classroom.jpg');
-
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -170,6 +164,7 @@ width:350px;
 height:450px;
 background: transparent url('http://www.terminally-incoherent.com/blog/wp-content/uploads/2010/02/maketitle.jpg');
 background-size:cover;
+background-repeat: no-repeat;
 background-color: rgba(0,0,0,.2);
 }
 
@@ -200,53 +195,77 @@ box-shadow:0px 0px 30px rgba(255,204,102,.5);
 }
 }
      </style>
-    </head>
-  <body>
-      <div id="disp">
-    
-       <form id="file_form"  class="formclass" method="POST" action="/web/" enctype="multipart/form-data" onsubmit="checkFile()">
-       {% csrf_token %}
-        <label class="custom-file-label" for="customFile">Web Based Detector</label>
 
-            
-              <div class="custom-file">
+
+  </head>
+  <body>
+    <div id="disp">
+
+  
+
+       <form id="file_form"  class="formclass" method="POST" action="/" enctype="multipart/form-data" onsubmit="checkFile()">
+        {% csrf_token %}
+                 <label class="custom-file-label" for="customFile">Web Based Detector</label>
+
+                        <div class="custom-file">
                         
 
-                <input type="file" class="custom-file-input" name="myfile" id="customFile" onchange="checkFileonchange()">
-                    <br/>
-                </div>
-                <label class="lab">Keywords:- </label><input name="name">
-          <button class="submit" type="submit">Submit</button>
+                                         <input type="file" class="custom-file-input" id="customFile" onchange="checkFileonchange()">
+                                             <br/>
+                        </div>
+                        <label class="lab">KeyWords:- </label><input name="name">
+        
+
+                    <button class="submit" type="submit">Submit</button>
       </form>
 
                 <pre class="out" id="output">
-                      {% if uploaded_file_url %}
-                        <a href="{{uploaded_file_url}}">{{uploaded_file_url}}</a>
-                      {% endif %}  
+
                 </pre>
-            </div>
+      </div>
+
+      <div id="spinner">
+        <div id="monitor">
+
+          <div class="scan"></div>
+          <div class="screen"></div>
+          
+        </div>
+        
+        <i class="fa fa-spinner fa-spin fa-10x spinstyle" style="font-size:24px"></i>
+      
+      </div>
 
 
-                <div id="spinner">
-                    <div id="monitor">
-            
-                      <div class="scan"></div>
-                      <div class="screen"></div>
-                      
-                    </div>
-                    
-                    <i class="fa fa-spinner fa-spin fa-10x spinstyle" style="font-size:24px"></i>
-                  
-                  </div>
-
-
-
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
                  <script>
-        function checkFileonchange(){
+                   function checkFileonchange()
+                   {
+
+                    var reader = new FileReader();
+                    var fileToRead = document.querySelector('input').files[0];
+
+                            reader.addEventListener("loadend", function() {
+                    // reader.result contains the contents of blob as a typed array
+                    // we insert content of file in DOM here
+                    document.getElementById('output').innerText = reader.result;
+            });
+
+
+            reader.readAsText(fileToRead);
+                    }
+
+        function checkFile(){
+
+             d1=  document.getElementById('disp');
+             d1.style.display="none";
+             d2= document.getElementById('spinner');
+             d2.style.display="block";
+
             
             var reader = new FileReader();
-            var fileToRead = document.querySelector('.custom-file-input').files[0];
+            var fileToRead = document.querySelector('input').files[0];
 
             // attach event, that will be fired, when read is end
             reader.addEventListener("loadend", function() {
@@ -259,24 +278,16 @@ box-shadow:0px 0px 30px rgba(255,204,102,.5);
             reader.readAsText(fileToRead);
                     }
 
-                    
-
                 </script>
 
-            <script>
+                <script>
 
-function checkFile(){
-
-    d1=  document.getElementById('disp');
-    d1.style.display="none";
-    d2= document.getElementById('spinner');
-    d2.style.display="block";
-
-
-
-           }
-
-       </script>
+                    const MyForm=document.getElementById("file_form");
+                    MyForm.addEventListener("submit",(e)=>{
+                        e.preventDefault();
+                        console.log(e);
+                    })
+                </script>
 
 
                 <script>
@@ -287,5 +298,9 @@ function checkFile(){
                 });
         </script>
 
-    </body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
 </html>
