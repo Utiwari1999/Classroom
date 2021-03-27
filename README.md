@@ -10,7 +10,7 @@ It includes various requirements like finding the right API which has lowest lat
 
 
 ## Front End
-HTML, CSS and Javascript.
+HTML , CSS and Javascript.
 
 ## Back End
 Django
