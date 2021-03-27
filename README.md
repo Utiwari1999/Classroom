@@ -18,7 +18,7 @@ Django
 ## Setup/Installation
 1. Clone the repository using https/ssh
 ```sh
-git clone https://github.com/jainil-4801/Django-REST-Quiz
+git clone https://github.com/Utiwari1999/Classroom.git
 ```
 
 2. Create a virtual environment
